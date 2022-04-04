@@ -1,12 +1,8 @@
 import time
 import pandas as pd
-import numpy as np
 import matplotlib.pylab as plt
-import seaborn as sns
 import pulp as p
-import random
-from itertools import combinations
-import winsound
+#import winsound
 import os
 import openpyxl
 
@@ -33,7 +29,8 @@ range_of_number_of_nodes=Nodes.shape[0]
 Vehicles=pd.read_excel("Input Data.xlsx","Vehicle Specifications",index_col=0)
 num_of_Vehicle_types=Vehicles.shape[0]
 
-for upto_Node_number in range(1,range_of_number_of_nodes):
+#for upto_Node_number in range(1,range_of_number_of_nodes):
+for upto_Node_number in range(10,13):
 
     row_number_on_Excel_Table+=1
     cell = sheet.cell(row = row_number_on_Excel_Table, column = 1)
@@ -169,7 +166,7 @@ for upto_Node_number in range(1,range_of_number_of_nodes):
     status=prob.solve()
     end_time=time.time()
 
-    winsound.Beep(555-19*upto_Node_number, 888+19*upto_Node_number) # where 500 is the frequency in Hertz and 1000 is the duration in miliseconds
+    #winsound.Beep(555-19*upto_Node_number, 888+19*upto_Node_number) # where 500 is the frequency in Hertz and 1000 is the duration in miliseconds
     print("This is the status:- ", p.LpStatus[prob.status])
     objec_val=p.value(prob.objective)
 
@@ -227,6 +224,7 @@ for upto_Node_number in range(1,range_of_number_of_nodes):
                             break
                 if start_node==0:
                     textfile.write(" --> "+str(start_node)+"\n")
+    textfile.close()
 
     # Call a Workbook() function of openpyxl to create a new blank Workbook object
     wb_individual = openpyxl.Workbook()
